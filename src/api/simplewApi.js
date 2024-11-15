@@ -8,14 +8,19 @@ const simplewApi = axios.create({
    baseURL: BASE_URL,
    headers: {
       accept: 'application/json',
-      Authorization: `Bearer ${AUTH_KEY}`,
    },
 })
 
 // 공통 API 호출 함수
 const fetchFromApi = async (url, params = {}) => {
    try {
-      const response = await simplewApi.get(url, { params })
+      // params에 API 키 추가
+      const response = await simplewApi.get(url, {
+         params: {
+            ...params,
+            appid: AUTH_KEY, // OpenWeatherMap에서는 appid 파라미터로 API 키를 받음
+         },
+      })
       return response
    } catch (error) {
       console.error(`API 요청 오류: ${error.message}`)
