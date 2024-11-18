@@ -1,1 +1,18 @@
+.daysSystem {
+   text-align: center;
+}
 
+.forecast-list {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-between;
+   gap: 70px;
+   margin-top: 50px;
+}
+
+.forecast-item {
+   border: 1px solid black;
+   border-radius: 10px;
+   width: 100px;
+   padding: 5px;
+}

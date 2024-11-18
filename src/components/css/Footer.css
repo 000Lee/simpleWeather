@@ -1,0 +1,8 @@
+footer {
+   background-color: rgba(0, 0, 0, 0.062);
+}
+
+footer > p {
+   color: black;
+   font-weight: 400;
+}
