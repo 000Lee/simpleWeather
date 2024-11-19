@@ -1,6 +1,40 @@
-//대기상태 api
-//http://api.openweathermap.org/data/2.5/air_pollution?lat=37.45&lon=126.4161&appid=01252e208ef90ff4d1a0291867d80276
-
-/* 
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { getMovies, getMovieDetails, getMovieCredits, searchMovie } from '../../api/simplewApi' */
+import { getAirWeather } from '../api/simplewApi'
+
+// 현재 날씨 가져오는 비동기 액션
+export const fetchAirWeather = createAsyncThunk('airweather/fetchAirWeather', async (q) => {
+   const response = await getAirWeather(q)
+   return response // 대기 상태 데이터를 그대로 반환
+})
+
+const currentSlice = createSlice({
+   name: 'airweather',
+   initialState: {
+      loading: false, // 로딩 여부 상태
+      airweather: null, // 대기 상태 데이터를 저장할 상태
+      error: null, // 에러 메시지 상태
+   },
+   reducers: {
+      resetWeathers(state) {
+         state.airweather = null // airWeather 상태 초기화
+      },
+   },
+   extraReducers: (builder) => {
+      builder
+         .addCase(fetchAirWeather.pending, (state) => {
+            state.loading = true
+            state.error = null
+         })
+         .addCase(fetchAirWeather.fulfilled, (state, action) => {
+            state.loading = false
+            state.airweather = action.payload // 응답 데이터를 airweather 상태에 저장
+         })
+         .addCase(fetchAirWeather.rejected, (state, action) => {
+            state.loading = false
+            state.error = action.error.message || '데이터를 가져오는 중 오류가 발생했습니다.'
+         })
+   },
+})
+
+export const { resetWeathers } = currentSlice.actions
+export default currentSlice.reducer

@@ -49,15 +49,21 @@ export const getThreeWeather = (q = 'incheon') => {
 // 대기 상태 가져오기
 export const getAirWeather = async (q = 'incheon') => {
    try {
-      // 먼저 현재 날씨 데이터에서 위도와 경도 가져오기
+      // 먼저 현재 날씨 데이터에서 위도와 경도를 가져오기
       const nowWeatherResponse = await getNowWeather(q)
       const { coord } = nowWeatherResponse.data
 
+      if (!coord || !coord.lat || !coord.lon) {
+         throw new Error('위도와 경도를 가져올 수 없습니다.')
+      }
+
       // 위도와 경도를 사용하여 대기 상태 정보 가져오기
-      return fetchFromApi(`/air_pollution`, {
+      const airWeatherResponse = await fetchFromApi(`/air_pollution`, {
          lat: coord.lat,
          lon: coord.lon,
       })
+
+      return airWeatherResponse.data // 대기 상태 데이터 반환
    } catch (error) {
       console.error(`대기 상태 요청 오류: ${error.message}`)
       throw error
