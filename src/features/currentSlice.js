@@ -4,6 +4,9 @@ import { getNowWeather } from '../api/simplewApi'
 // 현재 날씨 가져오는 비동기 액션
 export const fetchNowWeather = createAsyncThunk('nowweather/fetchNowWeather', async (q) => {
    const response = await getNowWeather(q)
+   if (!response.data || !response.data.name) {
+      throw new Error('지역을 찾을 수 없습니다.')
+   }
    return response.data
 })
 

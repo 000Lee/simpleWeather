@@ -1,8 +1,14 @@
 footer {
+   margin-top: 70px;
    background-color: rgba(0, 0, 0, 0.062);
 }
-
-footer > p {
+.footerps {
+   width: 1800px;
+   margin: 0 auto;
+   padding: 40px 0;
+}
+.footerps > p {
    color: black;
    font-weight: 400;
+   margin: 5px 0;
 }

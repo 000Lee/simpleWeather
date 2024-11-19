@@ -84,7 +84,7 @@ const Three = () => {
             {threeweather.list.slice(0, 20).map((forecast, index) => (
                <div key={index} className="forecast-item">
                   <p>{formatTime(forecast.dt)}</p>
-                  <p>{forecast.main?.temp}°C</p>
+                  <p>{forecast.main?.temp.toFixed(1)}°C</p>
                   <p>{forecast.weather[0]?.description}</p>
                   {/* 아이콘 경로 수정 */}
                   <img src={`https://openweathermap.org/img/wn/${forecast.weather[0]?.icon}@2x.png`} alt="날씨 아이콘" />
