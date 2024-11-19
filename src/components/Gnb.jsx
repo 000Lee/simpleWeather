@@ -9,14 +9,20 @@ function Gnb() {
                <li className="logo">
                   <NavLink to="/">Simple Weather</NavLink>
                </li>
-               <li style={{ float: 'right' }}>
-                  <NavLink to="/Air">air</NavLink>
+               <li style={{ float: 'right', width: '70px' }}>
+                  <NavLink to="/Air" className={({ isActive }) => (isActive ? 'active' : '')}>
+                     air
+                  </NavLink>
                </li>
-               <li style={{ float: 'right' }}>
-                  <NavLink to="/Days">days</NavLink>
+               <li style={{ float: 'right', width: '70px' }}>
+                  <NavLink to="/Days" className={({ isActive }) => (isActive ? 'active' : '')}>
+                     days
+                  </NavLink>
                </li>
-               <li style={{ float: 'right' }}>
-                  <NavLink to="/">now</NavLink>
+               <li style={{ float: 'right', width: '70px' }}>
+                  <NavLink to="/" className={({ isActive }) => (isActive ? 'active' : '')}>
+                     now
+                  </NavLink>
                </li>
             </ul>
          </nav>
@@ -25,3 +31,4 @@ function Gnb() {
 }
 
 export default Gnb
+// className={({ isActive }) => (isActive ? 'active' : '')}

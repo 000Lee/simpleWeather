@@ -35,3 +35,12 @@ li:not(:first-child) a:hover {
    background-color: rgba(0, 0, 0, 0.089);
    color: black;
 }
+nav .logo .active {
+   text-decoration: none;
+}
+nav .active {
+   text-decoration: underline;
+   text-decoration-color: red;
+   text-decoration-style: wavy;
+   text-underline-offset: 5px;
+}
