@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+
+import Switch from '@mui/material/Switch'
+
 import { fetchNowWeather } from '../features/currentSlice'
 import Search from './Search'
 
@@ -32,6 +35,15 @@ const Weather = () => {
    const dispatch = useDispatch()
    const { nowweather, loading, error } = useSelector((state) => state.nowweather)
    const [selectedCity, setSelectedCity] = useState({ name: 'Incheon', korean: '인천' }) // 기본값
+
+   /* 토글 ? */
+   const [checked, setChecked] = useState(false)
+
+   const handleChange = (event) => {
+      setChecked(event.target.checked) // 상태 업데이트
+   }
+
+   /*  */
 
    // 처음 렌더링 시 기본값으로 날씨 데이터를 가져옴
    useEffect(() => {
@@ -67,6 +79,17 @@ const Weather = () => {
 
    return (
       <>
+         {/* 토글? */}
+         <div>
+            <Switch
+               checked={checked}
+               onChange={handleChange}
+               color="success" // 기본 스타일 색상
+            />
+            {/* <p>{checked ? 'ON' : 'OFF'}</p> */}
+         </div>
+         {/*  */}
+
          {/* nowweather 초기 state는 null이므로 nowweather이 있을때만 값을 보여주도록 함 */}
          {nowweather && (
             <div className="mainSystem">
