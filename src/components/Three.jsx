@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchThreeWeather } from '../features/threehourSlice'
-import Autocomplete from '@mui/material/Autocomplete'
-import TextField from '@mui/material/TextField'
+
+import Search from './Search'
 
 import './css/Three.css'
 
@@ -50,7 +50,7 @@ const Three = () => {
       }
    }
 
-   if (loading) return <p>Loading...</p>
+   if (loading) return <p className="loading">L o a d i n g . . .</p>
    if (error) return <p>Error: {error}</p>
    if (!threeweather || !threeweather.list) return <p>No data available</p>
 
@@ -69,15 +69,12 @@ const Three = () => {
    return (
       <div className="daysSystem">
          {/* 지역 이름 */}
-         <p className="region">{getKoreanCityName(threeweather.city.name)}</p>
+         <p className="region">{getKoreanCityName(selectedCity.name)}</p>
          {/* 드롭다운 폼 */}
-         <Autocomplete
-            options={koreanCities} // 한국 도시 리스트
-            getOptionLabel={(option) => option.korean} // 한글 이름 표시
-            value={selectedCity} // 현재 선택된 도시
-            onChange={handleCityChange} // 선택 시 호출
-            disableClearable // Clear 버튼 비활성화
-            renderInput={(params) => <TextField {...params} label="도시를 클릭하세요" variant="outlined" sx={{ width: 300 }} />}
+         <Search
+            koreanCities={koreanCities} // 도시 목록 전달
+            selectedCity={selectedCity} // 현재 선택된 도시 전달
+            onCityChange={handleCityChange} // 도시 변경 핸들러 전달
          />
 
          <div className="forecast-list">
