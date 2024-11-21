@@ -29,6 +29,7 @@
    border: 2px solid black;
    border-radius: 10px;
    padding: 15px 0;
+   align-items: center;
 }
 .suntime {
    font-size: 40px;
@@ -38,5 +39,5 @@
 .line {
    font-size: 80px;
    font-weight: 100;
-   opacity: 0.5;
+   opacity: 0.3;
 }
