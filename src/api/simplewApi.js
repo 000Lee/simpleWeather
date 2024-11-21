@@ -52,6 +52,7 @@ export const getAirWeather = async (q = 'incheon') => {
       // 먼저 현재 날씨 데이터에서 위도와 경도를 가져오기
       const nowWeatherResponse = await getNowWeather(q)
       const { coord } = nowWeatherResponse.data
+      //구조분해할당을 사용했기 때문에 coord에 중괄호 씌움
 
       if (!coord || !coord.lat || !coord.lon) {
          throw new Error('위도와 경도를 가져올 수 없습니다.')

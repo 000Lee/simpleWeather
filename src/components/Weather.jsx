@@ -31,6 +31,80 @@ const koreanCities = [
    { name: 'Jeju City', korean: '제주' },
 ]
 
+const weatherDescriptions = {
+   '가벼운 비를 동반한 천둥구름': 'thunderstorm with light rain',
+   '비를 동반한 천둥구름': 'thunderstorm with rain',
+   '폭우를 동반한 천둥구름': 'thunderstorm with heavy rain',
+   '약한 천둥구름': 'light thunderstorm',
+   천둥구름: 'thunderstorm',
+   '강한 천둥구름': 'heavy thunderstorm',
+   '불규칙적 천둥구름': 'ragged thunderstorm',
+   '약한 연무를 동반한 천둥구름': 'thunderstorm with light drizzle',
+   '연무를 동반한 천둥구름': 'thunderstorm with drizzle',
+   '강한 안개비를 동반한 천둥구름': 'thunderstorm with heavy drizzle',
+   '가벼운 안개비': 'light intensity drizzle',
+   안개비: 'drizzle',
+   '강한 안개비': 'heavy intensity drizzle',
+   '가벼운 적은비': 'light intensity drizzle rain',
+   적은비: 'drizzle rain',
+   '강한 적은비': 'heavy intensity drizzle rain',
+   '소나기와 안개비': 'shower rain and drizzle',
+   '강한 소나기와 안개비': 'heavy shower rain and drizzle',
+   소나기: 'shower drizzle',
+   '실 비': 'light rain',
+   '보통 비': 'moderate rain',
+   '강한 비': 'heavy intensity rain',
+   '매우 강한 비': 'very heavy rain',
+   '극심한 비': 'extreme rain',
+   우박: 'freezing rain',
+   '약한 소나기 비': 'light intensity shower rain',
+   '소나기 비': 'shower rain',
+   '강한 소나기 비': 'heavy intensity shower rain',
+   '불규칙적 소나기 비': 'ragged shower rain',
+   '가벼운 눈': 'light snow',
+   눈: 'snow',
+   '강한 눈': 'heavy snow',
+   진눈깨비: 'sleet',
+   '소나기 진눈깨비': 'shower sleet',
+   '약한 비와 눈': 'light rain and snow',
+   '비와 눈': 'rain and snow',
+   '약한 소나기 눈': 'light shower snow',
+   '소나기 눈': 'shower snow',
+   '강한 소나기 눈': 'heavy shower snow',
+   박무: 'mist',
+   연기: 'smoke',
+   연무: 'haze',
+   '모래 먼지': 'sand, dust whirls',
+   안개: 'fog',
+   모래: 'sand',
+   먼지: 'dust',
+   화산재: 'volcanic ash',
+   돌풍: 'squalls',
+   토네이도: 'tornado',
+   맑음: 'clear sky',
+   '약간의 구름이 낀 하늘': 'few clouds',
+   구름조금: 'scattered clouds',
+   튼구름: 'broken clouds',
+   온흐림: 'overcast clouds',
+   태풍: 'tropical storm',
+   한랭: 'cold',
+   고온: 'hot',
+   바람부는: 'windy',
+   우박: 'hail',
+   '바람이 거의 없는': 'calm',
+   '약한 바람': 'light breeze',
+   '부드러운 바람': 'gentle breeze',
+   '중간 세기 바람': 'moderate breeze',
+   '신선한 바람': 'fresh breeze',
+   '센 바람': 'strong breeze',
+   '돌풍에 가까운 센 바람': 'high win',
+   돌풍: 'gale',
+   '심각한 돌풍': 'severe gale',
+   폭풍: 'storm',
+   '강한 폭풍': 'violent storm',
+   허리케인: 'hurricane',
+}
+
 const Weather = () => {
    const dispatch = useDispatch()
    const { nowweather, loading, error } = useSelector((state) => state.nowweather)
@@ -70,6 +144,7 @@ const Weather = () => {
          hour: '2-digit',
          minute: '2-digit',
          timeZone: 'Asia/Seoul',
+         hourCycle: 'h23',
       })
    }
 
@@ -79,13 +154,15 @@ const Weather = () => {
 
    return (
       <>
-         {/* 토글? */}
-         <div>
+         {/* 토글 */}
+         <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px', marginLeft: '10px' }}>
+            <p>한국어</p>
             <Switch
                checked={checked}
                onChange={handleChange}
                color="success" // 기본 스타일 색상
             />
+            <p>English</p>
             {/* <p>{checked ? 'ON' : 'OFF'}</p> */}
          </div>
          {/*  */}
@@ -94,29 +171,33 @@ const Weather = () => {
          {nowweather && (
             <div className="mainSystem">
                {/* 지역 이름 */}
-               <p className="region">{getKoreanCityName(selectedCity.name)}</p>
+               <p className="region">{checked ? selectedCity.name : getKoreanCityName(selectedCity.name)}</p>
+
                {/* 드롭다운 폼 */}
                <Search
                   koreanCities={koreanCities} // 도시 목록 전달
                   selectedCity={selectedCity} // 현재 선택된 도시 전달
                   onCityChange={handleCityChange} // 도시 변경 핸들러 전달
+                  checked={checked} // 체크 상태 전달
                />
                {/* <TextField {...params} />로 Autocomplete와 TextField 간 연결을 유지합니다. */}
                {/* 날씨 정보 */}
                <p>
                   <img src={`https://openweathermap.org/img/wn/${nowweather.weather[0]?.icon}@4x.png`} alt="날씨 아이콘" />
                </p>
-               <p className="describe">{nowweather.weather[0].description}</p>
+
+               <p className="describe">{checked ? weatherDescriptions[nowweather.weather[0].description] || nowweather.weather[0].description : nowweather.weather[0].description}</p>
+
                <p className="degree">{nowweather.main.temp.toFixed(1)}°C</p>
                {/* 일출 및 일몰 */}
                <ul className="sunUpdown">
                   <li>
-                     <p>일출</p>
+                     <p>{checked ? 'Sunrise' : '일출'}</p>
                      <p className="suntime">{formatTime(nowweather.sys.sunrise)}</p>
                   </li>
                   <li className="line">|</li>
                   <li>
-                     <p>일몰</p>
+                     <p>{checked ? 'Sunset' : '일몰'}</p>
                      <p className="suntime">{formatTime(nowweather.sys.sunset)}</p>
                   </li>
                </ul>

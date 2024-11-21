@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchAirWeather } from '../features/airSlice'
+import Switch from '@mui/material/Switch'
 
+import { fetchAirWeather } from '../features/airSlice'
 import Search from './Search'
 
 import './css/Airpollution.css'
@@ -34,6 +35,14 @@ const AirPollution = () => {
    const { airweather, loading, error } = useSelector((state) => state.airweather)
    const [selectedCity, setSelectedCity] = useState({ name: 'Incheon', korean: '인천' }) // 기본값
 
+   /* 토글 ? */
+   const [checked, setChecked] = useState(false)
+
+   const handleChange = (event) => {
+      setChecked(event.target.checked) // 상태 업데이트
+   }
+   /*  */
+
    useEffect(() => {
       dispatch(fetchAirWeather(selectedCity.name)) // 선택된 도시의 영어 이름으로 API 호출
    }, [dispatch, selectedCity])
@@ -63,11 +72,11 @@ const AirPollution = () => {
    const getAQIDescription = (aqi) => {
       switch (aqi) {
          case 1:
-            return '좋음'
+            return '매우 좋음'
          case 2:
-            return '보통'
+            return '좋음'
          case 3:
-            return '중간'
+            return '보통'
          case 4:
             return '나쁨'
          case 5:
@@ -154,39 +163,63 @@ const AirPollution = () => {
          return '알 수 없음' // 데이터가 없거나 잘못된 경우
       }
    }
+
+   /* toggle에 필요한 영한 번역 */
+   const getAQIenglish = {
+      '매우 좋음': 'Excellent',
+      좋음: 'Good',
+      보통: 'Ordinary ',
+      나쁨: 'Bad',
+      매우나쁨: 'Very bad',
+      '알 수 없음': 'Unknown',
+   }
    return (
       <>
+         {/* 토글 */}
+         <div style={{ display: 'flex', alignItems: 'center' }}>
+            <p>한국어</p>
+            <Switch
+               checked={checked}
+               onChange={handleChange}
+               color="success" // 기본 스타일 색상
+            />
+            <p>English</p>
+            {/* <p>{checked ? 'ON' : 'OFF'}</p> */}
+         </div>
+         {/*  */}
+
          {/* nowweather 초기 state는 null이므로 nowweather이 있을때만 값을 보여주도록 함 */}
          {airweather && (
             <div className="airMainSystem">
                {/* 지역 이름 */}
-               <p className="airRegion">{getKoreanCityName(selectedCity.name)}</p>
+               <p className="region">{checked ? selectedCity.name : getKoreanCityName(selectedCity.name)}</p>
                {/* 드롭다운 폼 */}
                <Search
                   koreanCities={koreanCities} // 도시 목록 전달
                   selectedCity={selectedCity} // 현재 선택된 도시 전달
                   onCityChange={handleCityChange} // 도시 변경 핸들러 전달
+                  checked={checked} // 체크 상태 전달
                />
 
                {/* 대기질 정보 */}
                <div className="imoji">
                   <p style={{ fontSize: '120px', marginTop: '30px' }}>{getAQIDescriptionWithEmoji(airweather.list[0].main.aqi)}</p>
-                  <p className="aqiTitle">대기질 지수</p>
-                  <p className="aqiDescript">{getAQIDescription(airweather.list[0].main.aqi)}</p>
+                  <p className="aqiTitle">{checked ? 'Air Quality Index' : '대기질 지수'}</p>
+                  <p className="aqiDescript">{checked ? getAQIenglish[getAQIDescription(airweather.list[0].main.aqi)] : getAQIDescription(airweather.list[0].main.aqi)}</p>
 
                   {/* 미세먼지들 */}
                   <ul className="dusts">
                      <li className="pm2_5">
-                        <p className="dustsTitle">초미세먼지</p>
+                        <p className="dustsTitle">{checked ? 'Ultrafine dust' : '초미세먼지'}</p>
                         <p style={{ fontSize: '38px', margin: '10px 0 ' }}>{getpm2_5DescriptionWithHeart(airweather.list[0].components.pm2_5.toFixed(1))}</p>
-                        <p>{getpm2_5Description(airweather.list[0].components.pm2_5.toFixed(1))}</p>
+                        <p>{checked ? getAQIenglish[getpm2_5Description(airweather.list[0].components.pm2_5.toFixed(1))] : getpm2_5Description(airweather.list[0].components.pm2_5.toFixed(1))}</p>
                         <p className="dustNumb">{airweather.list[0].components.pm2_5.toFixed(1)}µg/m³</p>
                      </li>
                      {/* <li className="line2">|</li> */}
                      <li className="pm10">
-                        <p className="dustsTitle">미세먼지</p>
+                        <p className="dustsTitle">{checked ? 'Fine dust' : '미세먼지'}</p>
                         <p style={{ fontSize: '38px', margin: '10px 0 ' }}>{getpm10DescriptionWithHeart(airweather.list[0].components.pm10.toFixed(1))}</p>
-                        <p>{getpm10Description(airweather.list[0].components.pm10.toFixed(1))}</p>
+                        <p>{checked ? getAQIenglish[getpm10Description(airweather.list[0].components.pm10.toFixed(1))] : getpm10Description(airweather.list[0].components.pm10.toFixed(1))}</p>
                         <p className="dustNumb">{airweather.list[0].components.pm10.toFixed(1)}µg/m³</p>
                      </li>
                   </ul>
