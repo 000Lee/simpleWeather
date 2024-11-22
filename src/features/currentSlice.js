@@ -1,6 +1,10 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { getNowWeather } from '../api/simplewApi'
 
+//createAsyncThunk
+//Redux Toolkit에서 비동기 작업을 처리하기 위한 강력한 도구
+//비동기 작업(예: API 호출)의 시작, 성공, 실패 상태를 자동으로 관리하고, 이를 Redux 상태에 쉽게 반영할 수 있음.
+
 // 현재 날씨 가져오는 비동기 액션
 export const fetchNowWeather = createAsyncThunk('nowweather/fetchNowWeather', async (q) => {
    const response = await getNowWeather(q)

@@ -4,7 +4,10 @@ import { getAirWeather } from '../api/simplewApi'
 // 현재 날씨 가져오는 비동기 액션
 export const fetchAirWeather = createAsyncThunk('airweather/fetchAirWeather', async (q) => {
    const response = await getAirWeather(q)
-   return response // 대기 상태 데이터를 그대로 반환
+   return response // 대기 상태 데이터를 그대로 반환.
+
+   /* ? */
+   //여기서 response.data하면 api에서 안붙여도 되나...?
 })
 
 const currentSlice = createSlice({

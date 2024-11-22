@@ -19,5 +19,5 @@ function Home() {
       </>
    )
 }
-
+//Footer 배경색 화면에 꽉 차게 하려고 컴포넌트 wrap 바깥에 위치
 export default Home
