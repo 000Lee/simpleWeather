@@ -40,6 +40,7 @@ const currentSlice = createSlice({
             state.loading = false
             state.error = action.error.message
          })
+      //체이닝 방식
    },
 })
 

@@ -8,6 +8,7 @@ import Search from './Search'
 
 import './css/Weather.css'
 
+// nono, happy, candy를 그냥 검색해봤는데 다른 나라의 도시 결과로 나옴 -> 나라 제한은 유료 => 검색 도시를 제한함
 const koreanCities = [
    { name: 'Goyang-si', korean: '고양' },
    { name: 'Seoul', korean: '서울' },
