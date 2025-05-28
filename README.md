@@ -1,30 +1,26 @@
 ![LUNAR EffecT](https://github.com/000Lee/simpleWeather/blob/main/public/logo%20(2).png)
 
-리뷰를 입력하면 랜덤으로 포인트를 증정하는 게임 이벤트 사이트
+OpenWeather API를 활용한 날씨정보
+ - `지금날씨, 5일예보, 대기질 `  
+  - ` 지역별 조회`  
+  - `한영 전환`  
 
 <br/>
 
 # 개발기간
 
-24.12.23 ~ 25.01.02
+24.11.14 ~ 24.11.22
 
 <br/>
 
 # 소개
-
-모바일 게임사의 이벤트 페이지를 컨셉으로하여, 리뷰 작성 시 포인트를 지급하는 시스템을 구현한 프로젝트입니다.
-
-<br/>
-
-### 핵심 기능 - 리뷰 작성 시 랜덤으로 포인트 지급
+Simple Weather는 사용자가 원하는 도시를 입력하면, 실시간 날씨 정보를 보여주는 미니멀한 날씨 조회 웹 애플리케이션입니다.
+React 기반으로 제작되었으며, OpenWeather API를 활용해 현재 기온, 날씨 상태, 대기 등을 직관적으로 확인할 수 있습니다.
 
 <br/>
 
 
-### [화면 설계서](https://www.figma.com/design/jxkNxGpNvaEImUc9SaWy3g/React-Nodejs-%EA%B0%9C%EC%9D%B8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8?node-id=0-1&t=FRsKCpzPLPgvv4TP-1)
-
-### [ERD](https://www.erdcloud.com/d/7PQfv2Jjfnz6miQMu)
-
+### [화면 설계서](https://www.figma.com/design/137R7iBLSwzcT9mCT5ZbUF/%EB%82%A0%EC%94%A8_%EC%9D%B4%EA%B2%BD%ED%9D%AC?node-id=0-1&t=em5fvQqn3O0JYquR-1)
 
 <br/>
 
@@ -32,10 +28,49 @@
 
 ## 🖥 Front-end  
 - **React** v19.0.0  
-- **사용 라이브러리**  
-  - `axios`  
-  - `redux`, `@reduxjs/toolkit`  
-  - `styled-components`  
-  - `react-router-dom`  
 
-## 🛠 Back-end  
+📦 사용 라이브러리
+🔧 기본 설정
+react
+
+react-dom
+
+react-router-dom
+
+react-scripts
+
+🌐 상태 관리
+redux
+
+@reduxjs/toolkit
+
+react-redux
+
+💬 API 통신
+axios
+
+🎨 스타일링 & UI
+styled-components
+
+@emotion/react
+
+@emotion/styled
+
+@mui/material
+
+@mui/icons-material
+
+📱 인터랙션
+swiper
+
+🧪 테스트
+@testing-library/react
+
+@testing-library/jest-dom
+
+@testing-library/user-event
+
+📊 웹 성능 측정
+web-vitals
+
+
