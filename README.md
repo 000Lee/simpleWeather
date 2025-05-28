@@ -29,48 +29,24 @@ React 기반으로 제작되었으며, OpenWeather API를 활용해 현재 기�
 ## 🖥 Front-end  
 - **React** v19.0.0  
 
-📦 사용 라이브러리
-🔧 기본 설정
-react
 
-react-dom
+## 📦 사용 라이브러리
 
-react-router-dom
+### 🔧 기본 설정
+- `react`
+- `react-dom`
+- `react-router-dom`
+- `react-scripts`
 
-react-scripts
+### 🌐 상태 관리
+- `redux`
+- `@reduxjs/toolkit`
+- `react-redux`
 
-🌐 상태 관리
-redux
+### 💬 API 통신
+- `axios`
 
-@reduxjs/toolkit
-
-react-redux
-
-💬 API 통신
-axios
-
-🎨 스타일링 & UI
-styled-components
-
-@emotion/react
-
-@emotion/styled
-
-@mui/material
-
-@mui/icons-material
-
-📱 인터랙션
-swiper
-
-🧪 테스트
-@testing-library/react
-
-@testing-library/jest-dom
-
-@testing-library/user-event
-
-📊 웹 성능 측정
-web-vitals
+### 🎨 스타일링 & UI
+- `styled-components`
 
 
