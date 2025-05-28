@@ -29,6 +29,10 @@ Simple Weather는 사용자가 원하는 도시를 입력하면, 실시간 날�
 ## 🖥 Front-end  
 - **React** v19.0.0  
 
+## 🚀 Deployment
+- **Netlify**  
+  👉 [https://simple-weather2024.netlify.app/](https://simple-weather2024.netlify.app/)
+
 
 ## 📦 사용 라이브러리
 
