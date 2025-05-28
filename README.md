@@ -1,7 +1,7 @@
 <p style="font-family: 'Pretendard'; font-weight: 400; font-size: 48px;">
   Simple Weather
 </p>
-
+  Simple Weather
 
 리뷰를 입력하면 랜덤으로 포인트를 증정하는 게임 이벤트 사이트
 
