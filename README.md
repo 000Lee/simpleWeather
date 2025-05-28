@@ -1,4 +1,4 @@
-![LUNAR EffecT](https://github.com/000Lee/simpleWeather/blob/main/public/logo%20(2).png)
+![Simple Weather](https://github.com/000Lee/simpleWeather/blob/main/public/logo%20(2).png)
 
 OpenWeather API를 활용한 날씨정보
  - `지금날씨, 5일예보, 대기질 `  
@@ -31,7 +31,7 @@ Simple Weather는 사용자가 원하는 도시를 입력하면, 실시간 날�
 
 ## 🚀 Deployment
 - **Netlify**  
-  👉 [https://simple-weather2024.netlify.app/](https://simple-weather2024.netlify.app/)
+  [Simple Weather 바로가기](https://simple-weather2024.netlify.app/)
 
 
 ## 📦 사용 라이브러리
